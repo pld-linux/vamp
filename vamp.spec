@@ -1,5 +1,8 @@
 # TODO:
 # - sonic-visualiser links libvamp-hostsdk.so
+# - what about changing package name (vamp-plugin, vamp-plugin-sdk)
+# - package example plugins;
+# - create more subpackages? (vamp-sdk, vamp-hostsdk)
 #
 %define	_srcname	vamp-plugin-sdk
 Summary:	vamp provides API for audio analysis and feature extraction plugins
