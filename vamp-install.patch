@@ -1,11 +1,45 @@
 --- vamp-plugin-sdk-1.0/Makefile.orig	2007-03-30 15:53:04.000000000 +0000
 +++ vamp-plugin-sdk-1.0/Makefile	2007-03-30 15:57:18.000000000 +0000
-@@ -15,7 +15,7 @@
+@@ -15,10 +15,12 @@
  # editing for non-Linux platforms.  Of course you don't necessarily
  # have to use "make install".
  #
 -INSTALL_PREFIX	 	  := /usr/local
-+INSTALL_PREFIX	 	  := $(DESTDIR)/usr
++PREFIX			  := /usr
++INSTALL_PREFIX	 	  := $(DESTDIR)$(PREFIX)
  INSTALL_API_HEADERS	  := $(INSTALL_PREFIX)/include/vamp
  INSTALL_SDK_HEADERS	  := $(INSTALL_PREFIX)/include/vamp-sdk
- INSTALL_SDK_LIBS	  := $(INSTALL_PREFIX)/lib
+-INSTALL_SDK_LIBS	  := $(INSTALL_PREFIX)/lib
++LIBDIR			  := /usr/lib
++INSTALL_SDK_LIBS	  := $(DESTDIR)$(LIBDIR)
+ 
+ INSTALL_SDK_LIBNAME	  := libvamp-sdk.so.1.0.0
+ INSTALL_SDK_LINK_ABI	  := libvamp-sdk.so.1
+@@ -176,22 +178,22 @@
+ 		ln -s $(INSTALL_SDK_LIBNAME) $(INSTALL_SDK_LIBS)/$(INSTALL_SDK_LINK_DEV)
+ 		rm -f $(INSTALL_SDK_LIBS)/$(INSTALL_HOSTSDK_LINK_DEV)
+ 		ln -s $(INSTALL_HOSTSDK_LIBNAME) $(INSTALL_SDK_LIBS)/$(INSTALL_HOSTSDK_LINK_DEV)
+-		sed "s,%PREFIX%,$(INSTALL_PREFIX)," $(APIDIR)/vamp.pc.in \
++		sed "s,%PREFIX%,$(PREFIX)," $(APIDIR)/vamp.pc.in \
+ 		> $(INSTALL_PKGCONFIG)/vamp.pc
+-		sed "s,%PREFIX%,$(INSTALL_PREFIX)," $(SDKDIR)/vamp-sdk.pc.in \
++		sed "s,%PREFIX%,$(PREFIX)," $(SDKDIR)/vamp-sdk.pc.in \
+ 		> $(INSTALL_PKGCONFIG)/vamp-sdk.pc
+-		sed "s,%PREFIX%,$(INSTALL_PREFIX)," $(SDKDIR)/vamp-hostsdk.pc.in \
++		sed "s,%PREFIX%,$(PREFIX)," $(SDKDIR)/vamp-hostsdk.pc.in \
+ 		> $(INSTALL_PKGCONFIG)/vamp-hostsdk.pc
+ 		sed -e "s,%LIBNAME%,$(INSTALL_SDK_LIBNAME),g" \
+ 		    -e "s,%LINK_ABI%,$(INSTALL_SDK_LINK_ABI),g" \
+ 		    -e "s,%LINK_DEV%,$(INSTALL_SDK_LINK_DEV),g" \
+ 		    -e "s,%STATIC%,$(INSTALL_SDK_STATIC),g" \
+-		    -e "s,%LIBS%,$(INSTALL_SDK_LIBS),g" $(SDK_LA).in \
++		    -e "s,%LIBS%,$(LIBDIR),g" $(SDK_LA).in \
+ 		> $(INSTALL_SDK_LIBS)/$(INSTALL_SDK_LA)
+ 		sed -e "s,%LIBNAME%,$(INSTALL_HOSTSDK_LIBNAME),g" \
+ 		    -e "s,%LINK_ABI%,$(INSTALL_HOSTSDK_LINK_ABI),g" \
+ 		    -e "s,%LINK_DEV%,$(INSTALL_HOSTSDK_LINK_DEV),g" \
+ 		    -e "s,%STATIC%,$(INSTALL_HOSTSDK_STATIC),g" \
+-		    -e "s,%LIBS%,$(INSTALL_SDK_LIBS),g" $(SDK_LA).in \
++		    -e "s,%LIBS%,$(LIBDIR),g" $(SDK_LA).in \
+ 		> $(INSTALL_SDK_LIBS)/$(INSTALL_HOSTSDK_LA)
+ 
