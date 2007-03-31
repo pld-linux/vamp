@@ -1,3 +1,6 @@
+# TODO:
+# - sonic-visualiser links libvamp-hostsdk.so
+#
 %define	_srcname	vamp-plugin-sdk
 Summary:	vamp provides API for audio analysis and feature extraction plugins
 Name:		vamp
