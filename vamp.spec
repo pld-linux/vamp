@@ -2,7 +2,7 @@
 Summary:	vamp provides API for audio analysis and feature extraction plugins
 Name:		vamp
 Version:	1.0
-Release:	0.1
+Release:	0.2
 License:	BSD-like
 Group:		Applications
 Source0:	http://dl.sourceforge.net/sv1/%{_srcname}-%{version}.tar.gz
