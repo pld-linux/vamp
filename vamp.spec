@@ -5,12 +5,13 @@
 # - create more subpackages? (vamp-sdk, vamp-hostsdk)
 #
 %define	_srcname	vamp-plugin-sdk
-Summary:	vamp provides API for audio analysis and feature extraction plugins
+Summary:	vamp - API for audio analysis and feature extraction plugins
+SummarY(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
 Version:	1.0
 Release:	0.2
 License:	BSD-like
-Group:		Applications
+Group:		Libraries
 Source0:	http://dl.sourceforge.net/sv1/%{_srcname}-%{version}.tar.gz
 # Source0-md5:	5c63eaa2fc6d5c871b76da937b8e0b2c
 Patch0:		%{name}-install.patch
@@ -20,8 +21,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Vamp is an audio processing plugin system for plugins that extract
-descriptive information from audio data — typically referred to as
+descriptive information from audio data - typically referred to as
 audio analysis plugins or audio feature extraction plugins.
+
+%description -l pl.UTF-8
+Vamp to system wtyczek przetwarzających dźwięk dla wtyczek
+wydobywających informacje opisowe z danych dźwiękowych - przeważnie
+nazywane wtyczkami analizy dźwięku lub wtyczkami wydobywającymi cechy
+dźwięku.
 
 %package devel
 Summary:	Header files for vamp library
