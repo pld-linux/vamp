@@ -69,6 +69,8 @@ Statyczna biblioteka vamp.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
+	PREFIX=%{_prefix} \
+	LIB=%{_lib} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
