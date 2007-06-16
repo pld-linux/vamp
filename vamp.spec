@@ -15,6 +15,7 @@ Group:		Libraries
 Source0:	http://dl.sourceforge.net/sv1/%{_srcname}-%{version}.tar.gz
 # Source0-md5:	5c63eaa2fc6d5c871b76da937b8e0b2c
 Patch0:		%{name}-install.patch
+Patch1:		%{name}-optflags.patch
 URL:		http://www.vamp-plugins.org/
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -57,10 +58,11 @@ Statyczna biblioteka vamp.
 %prep
 %setup -q -n %{_srcname}-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} \
-	CFLAGS="%{rpmcflags}" \
+	OPTFLAGS="%{rpmcxxflags}" \
 	LDFLAGS="%{rpmldflags}"
 
 %install
