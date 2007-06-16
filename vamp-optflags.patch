@@ -1,5 +1,5 @@
---- vamp-plugin-sdk-1.0/Makefile.orig	2007-06-16 15:24:17.000000000 -0400
-+++ vamp-plugin-sdk-1.0/Makefile	2007-06-16 15:26:09.401546391 -0400
+--- vamp-plugin-sdk-1.0/Makefile.orig	2007-06-16 15:39:25.000000000 -0400
++++ vamp-plugin-sdk-1.0/Makefile	2007-06-16 15:39:51.201732602 -0400
 @@ -38,7 +38,7 @@
  
  # Compile flags
@@ -8,4 +8,13 @@
 +CXXFLAGS	:= $(OPTFLAGS) -fpic -Wall -I$(SDKDIR) -I$(APIDIR) -I.
  
  # Libraries required for the host at link time
+ #
+@@ -53,7 +53,7 @@
+ 
+ # Flags required to tell the compiler to link to a dynamically loadable object
+ #
+-PLUGIN_LDFLAGS	= -shared -Wl,-Bsymbolic -static-libgcc
++PLUGIN_LDFLAGS	= -shared -Wl,-Bsymbolic
+ 
+ # File extension for a dynamically loadable object
  #
