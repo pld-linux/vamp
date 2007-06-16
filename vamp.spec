@@ -4,14 +4,14 @@
 # - package example plugins;
 # - create more subpackages? (vamp-sdk, vamp-hostsdk)
 #
-%define	_srcname	vamp-plugin-sdk
 Summary:	vamp - API for audio analysis and feature extraction plugins
-SummarY(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
+Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
 Version:	1.0
 Release:	0.2
 License:	BSD-like
 Group:		Libraries
+%define		_srcname	vamp-plugin-sdk
 Source0:	http://dl.sourceforge.net/sv1/%{_srcname}-%{version}.tar.gz
 # Source0-md5:	5c63eaa2fc6d5c871b76da937b8e0b2c
 Patch0:		%{name}-install.patch
