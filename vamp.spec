@@ -1,14 +1,14 @@
 # TODO:
 # - sonic-visualiser links libvamp-hostsdk.so
-# - what about changing package name (vamp-plugin, vamp-plugin-sdk)
-# - package example plugins;
 # - create more subpackages? (vamp-sdk, vamp-hostsdk)
 #
+%define	vampplugindir	%{_libdir}/vamp
+
 Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
 Version:	1.0
-Release:	0.2
+Release:	0.9
 License:	BSD-like
 Group:		Libraries
 %define		_srcname	vamp-plugin-sdk
@@ -55,6 +55,18 @@ Static vamp library.
 %description static -l pl.UTF-8
 Statyczna biblioteka vamp.
 
+%package plugins-example
+Summary:	Example vamp plugins
+Summary(pl.UTF-8):	Przykładowe wtyczki vampa
+Group:		Applications/Sound
+Requires:	%{name} = %{version}-%{release}
+
+%description plugins-example
+Example vamp plugins.
+
+%description plugins-example -l pl.UTF-8
+Przykładowe wtyczki vampa.
+
 %prep
 %setup -q -n %{_srcname}-%{version}
 %patch0 -p1
@@ -72,6 +84,8 @@ rm -rf $RPM_BUILD_ROOT
 	PREFIX=%{_prefix} \
 	LIB=%{_lib} \
 	DESTDIR=$RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{vampplugindir}
+install examples/*.so $RPM_BUILD_ROOT%{vampplugindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -84,6 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %ghost %attr(755,root,root) %{_libdir}/lib*.so.?
+%dir %{vampplugindir}
 
 %files devel
 %defattr(644,root,root,755)
@@ -96,3 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files plugins-example
+%defattr(644,root,root,755)
+%attr(755,root,root) %{vampplugindir}/*so
