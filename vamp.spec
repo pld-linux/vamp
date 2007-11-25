@@ -1,5 +1,4 @@
 # TODO:
-# - sonic-visualiser links libvamp-hostsdk.so
 # - create more subpackages? (vamp-sdk, vamp-hostsdk)
 #
 %define	vampplugindir	%{_libdir}/vamp
@@ -7,15 +6,17 @@
 Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
-Version:	1.0
-Release:	0.9
+Version:	1.1
+Release:	1
 License:	BSD-like
 Group:		Libraries
 %define		_srcname	vamp-plugin-sdk
-Source0:	http://dl.sourceforge.net/sv1/%{_srcname}-%{version}.tar.gz
-# Source0-md5:	5c63eaa2fc6d5c871b76da937b8e0b2c
+# Source0:	http://dl.sourceforge.net/sv1/%{_srcname}-%{version}.tar.bz2
+Source0:	%{_srcname}-%{version}.tar.bz2
+# Source0-md5:	702cad9639291e20d3b59a15ab48859c
 Patch0:		%{name}-install.patch
 Patch1:		%{name}-optflags.patch
+Patch2:		%{name}-link.patch
 URL:		http://www.vamp-plugins.org/
 BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -71,6 +72,7 @@ Przykładowe wtyczki vampa.
 %setup -q -n %{_srcname}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} \
