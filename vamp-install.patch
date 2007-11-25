@@ -1,6 +1,6 @@
 --- vamp-plugin-sdk-1.0/Makefile.orig	2007-03-02 09:16:12.000000000 -0500
 +++ vamp-plugin-sdk-1.0/Makefile	2007-06-16 15:48:40.238706429 -0400
-@@ -15,10 +15,10 @@
+@@ -15,11 +15,11 @@
  # editing for non-Linux platforms.  Of course you don't necessarily
  # have to use "make install".
  #
@@ -8,6 +8,7 @@
 +INSTALL_PREFIX	 	  := $(DESTDIR)$(PREFIX)
  INSTALL_API_HEADERS	  := $(INSTALL_PREFIX)/include/vamp
  INSTALL_SDK_HEADERS	  := $(INSTALL_PREFIX)/include/vamp-sdk
+ INSTALL_HOSTEXT_HEADERS	  := $(INSTALL_PREFIX)/include/vamp-sdk/hostext
 -INSTALL_SDK_LIBS	  := $(INSTALL_PREFIX)/lib
 +INSTALL_SDK_LIBS	  := $(INSTALL_PREFIX)/$(LIB)
  
