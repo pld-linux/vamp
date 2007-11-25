@@ -1,0 +1,30 @@
+--- vamp-plugin-sdk-1.1/Makefile.orig	2007-11-25 00:28:05.269881553 +0100
++++ vamp-plugin-sdk-1.1/Makefile	2007-11-25 00:28:31.765839431 +0100
+@@ -120,10 +120,10 @@
+ 		$(SDKDIR)/libvamp-hostsdk.a
+ 
+ SDK_DYNAMIC	= \
+-		$(SDKDIR)/libvamp-sdk.so
++		$(SDKDIR)/libvamp-sdk.so.1.0.0
+ 
+ HOSTSDK_DYNAMIC	= \
+-		$(SDKDIR)/libvamp-hostsdk.so
++		$(SDKDIR)/libvamp-hostsdk.so.1.0.0
+ 
+ SDK_LA		= \
+ 		$(SDKDIR)/libvamp-sdk.la
+--- vamp-plugin-sdk-1.1/Makefile.orig	2007-11-25 01:10:12.384354398 +0100
++++ vamp-plugin-sdk-1.1/Makefile	2007-11-25 01:12:02.867499501 +0100
+@@ -168,10 +168,10 @@
+ 		$(AR) r $@ $(HOSTSDK_OBJECTS)
+ 
+ $(SDK_DYNAMIC):	$(SDK_OBJECTS) $(API_HEADERS) $(SDK_HEADERS)
+-		$(CXX) $(LDFLAGS) $(PLUGIN_LDFLAGS) -o $@ $(SDK_OBJECTS)
++		$(CXX) $(LDFLAGS) $(PLUGIN_LDFLAGS) -Wl,-soname=$(INSTALL_SDK_LINK_ABI) -o $@ $(SDK_OBJECTS)
+ 
+ $(HOSTSDK_DYNAMIC):	$(HOSTSDK_OBJECTS) $(API_HEADERS) $(HOSTSDK_HEADERS) $(HOSTEXT_HEADERS)
+-		$(CXX) $(LDFLAGS) $(PLUGIN_LDFLAGS) -o $@ $(HOSTSDK_OBJECTS)
++		$(CXX) $(LDFLAGS) $(PLUGIN_LDFLAGS) -Wl,-soname=$(INSTALL_HOSTSDK_LINK_ABI) -o $@ $(HOSTSDK_OBJECTS)
+ 
+ $(PLUGIN_TARGET):	$(PLUGIN_OBJECTS) $(SDK_STATIC) $(PLUGIN_HEADERS)
+ 		$(CXX) $(LDFLAGS) $(PLUGIN_LDFLAGS) -o $@ $(PLUGIN_OBJECTS) $(PLUGIN_LIBS)
