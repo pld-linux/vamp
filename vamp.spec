@@ -6,14 +6,13 @@
 Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
-Version:	1.1
-Release:	1
+Version:	2.1
+Release:	0.1
 License:	BSD-like
 Group:		Libraries
 %define		_srcname	vamp-plugin-sdk
-# Source0:	http://dl.sourceforge.net/sv1/%{_srcname}-%{version}.tar.bz2
-Source0:	%{_srcname}-%{version}.tar.bz2
-# Source0-md5:	702cad9639291e20d3b59a15ab48859c
+Source0:	http://dl.sourceforge.net/vamp/%{_srcname}-%{version}.tar.gz
+# Source0-md5:	13252077a73987dae72a9174e529b6b9
 Patch0:		%{name}-install.patch
 Patch1:		%{name}-optflags.patch
 Patch2:		%{name}-link.patch
