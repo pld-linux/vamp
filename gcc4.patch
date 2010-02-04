@@ -1,0 +1,11 @@
+--- vamp-plugin-sdk-2.1/examples/FixedTempoEstimator.cpp.orig	2010-02-04 23:10:21.481340112 +0100
++++ vamp-plugin-sdk-2.1/examples/FixedTempoEstimator.cpp	2010-02-04 23:10:38.089880639 +0100
+@@ -44,7 +44,7 @@ using std::endl;
+ using Vamp::RealTime;
+ 
+ #include <cmath>
+-
++#include <cstdio>
+ 
+ class FixedTempoEstimator::D
+ // this class just avoids us having to declare any data members in the header

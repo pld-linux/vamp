@@ -1,5 +1,6 @@
 # TODO:
 # - create more subpackages? (vamp-sdk, vamp-hostsdk)
+# - unpackaged programs
 #
 %define	vampplugindir	%{_libdir}/vamp
 
@@ -7,17 +8,17 @@ Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
 Version:	2.1
-Release:	0.1
+Release:	1
 License:	BSD-like
 Group:		Libraries
 %define		_srcname	vamp-plugin-sdk
 Source0:	http://dl.sourceforge.net/vamp/%{_srcname}-%{version}.tar.gz
 # Source0-md5:	13252077a73987dae72a9174e529b6b9
-Patch0:		%{name}-install.patch
-Patch1:		%{name}-optflags.patch
-Patch2:		%{name}-link.patch
+Patch0:		gcc4.patch
 URL:		http://www.vamp-plugins.org/
+BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -70,23 +71,16 @@ Przykładowe wtyczki vampa.
 %prep
 %setup -q -n %{_srcname}-%{version}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
-%{__make} \
-	OPTFLAGS="%{rpmcxxflags}" \
-	LDFLAGS="%{rpmldflags}"
+%configure
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	PREFIX=%{_prefix} \
-	LIB=%{_lib} \
 	DESTDIR=$RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{vampplugindir}
-install examples/*.so $RPM_BUILD_ROOT%{vampplugindir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -97,22 +91,29 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING README
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%ghost %attr(755,root,root) %{_libdir}/lib*.so.?
+%attr(755,root,root) %{_libdir}/libvamp-hostsdk.*.*.*
+%attr(755,root,root) %{_libdir}/libvamp-sdk.*.*.*
+%ghost %attr(755,root,root) %{_libdir}/libvamp-hostsdk.so.3
+%ghost %attr(755,root,root) %{_libdir}/libvamp-sdk.so.2
 %dir %{vampplugindir}
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libvamp-hostsdk.so
+%attr(755,root,root) %{_libdir}/libvamp-sdk.so
+%{_libdir}/libvamp-hostsdk.la
+%{_libdir}/libvamp-sdk.la
 %{_includedir}/vamp
+%{_includedir}/vamp-hostsdk
 %{_includedir}/vamp-sdk
 %{_pkgconfigdir}/*.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libvamp-hostsdk.a
+%{_libdir}/libvamp-sdk.a
 
 %files plugins-example
 %defattr(644,root,root,755)
-%attr(755,root,root) %{vampplugindir}/*so
+%attr(755,root,root) %{vampplugindir}/vamp-example-plugins.cat
+%attr(755,root,root) %{vampplugindir}/vamp-example-plugins.so
