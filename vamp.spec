@@ -4,6 +4,7 @@
 #
 %define	vampplugindir	%{_libdir}/vamp
 
+%define		_srcname	vamp-plugin-sdk
 Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
@@ -11,7 +12,6 @@ Version:	2.1
 Release:	1
 License:	BSD-like
 Group:		Libraries
-%define		_srcname	vamp-plugin-sdk
 Source0:	http://dl.sourceforge.net/vamp/%{_srcname}-%{version}.tar.gz
 # Source0-md5:	13252077a73987dae72a9174e529b6b9
 Patch0:		gcc4.patch
@@ -93,8 +93,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README
 %attr(755,root,root) %{_libdir}/libvamp-hostsdk.*.*.*
 %attr(755,root,root) %{_libdir}/libvamp-sdk.*.*.*
-%ghost %attr(755,root,root) %{_libdir}/libvamp-hostsdk.so.3
-%ghost %attr(755,root,root) %{_libdir}/libvamp-sdk.so.2
+%attr(755,root,root) %ghost %attr(755,root,root) %{_libdir}/libvamp-hostsdk.so.3
+%attr(755,root,root) %ghost %attr(755,root,root) %{_libdir}/libvamp-sdk.so.2
 %dir %{vampplugindir}
 
 %files devel
