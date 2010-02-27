@@ -1,9 +1,9 @@
 # TODO:
 # - create more subpackages? (vamp-sdk, vamp-hostsdk)
-# - unpackaged programs
+# - unpackaged programs:
+#	/usr/bin/vamp-rdf-template-generator
+#	/usr/bin/vamp-simple-host
 #
-%define	vampplugindir	%{_libdir}/vamp
-
 %define		_srcname	vamp-plugin-sdk
 Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
@@ -20,6 +20,8 @@ BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define	vampplugindir	%{_libdir}/vamp
 
 %description
 Vamp is an audio processing plugin system for plugins that extract
@@ -74,13 +76,20 @@ Przykładowe wtyczki vampa.
 
 %build
 %configure
-%{__make}
+%{__make} \
+	CXX="%{__cxx}" \
+	LDFLAGS="%{rpmcxxflags} %{rpmldflags}" \
+	INSTALL_SDK_LIBS="%{_libdir}" \
+	INSTALL_PLUGINS="%{vampplugindir}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	INSTALL_SDK_LIBS="%{_libdir}" \
+	INSTALL_PLUGINS="%{vampplugindir}" \
+	INSTALL_PKGCONFIG="%{_pkgconfigdir}"
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -93,8 +102,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING README
 %attr(755,root,root) %{_libdir}/libvamp-hostsdk.*.*.*
 %attr(755,root,root) %{_libdir}/libvamp-sdk.*.*.*
-%attr(755,root,root) %ghost %attr(755,root,root) %{_libdir}/libvamp-hostsdk.so.3
-%attr(755,root,root) %ghost %attr(755,root,root) %{_libdir}/libvamp-sdk.so.2
+%attr(755,root,root) %ghost %{_libdir}/libvamp-hostsdk.so.3
+%attr(755,root,root) %ghost %{_libdir}/libvamp-sdk.so.2
 %dir %{vampplugindir}
 
 %files devel
