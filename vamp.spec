@@ -1,27 +1,24 @@
 # TODO:
 # - create more subpackages? (vamp-sdk, vamp-hostsdk)
-# - unpackaged programs:
-#	/usr/bin/vamp-rdf-template-generator
-#	/usr/bin/vamp-simple-host
 #
-%define		_srcname	vamp-plugin-sdk
+%define		srcname	vamp-plugin-sdk
 Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
-Version:	2.1
+Version:	2.2.1
 Release:	1
-License:	BSD-like
+License:	MIT
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/vamp/%{_srcname}-%{version}.tar.gz
-# Source0-md5:	13252077a73987dae72a9174e529b6b9
-Patch0:		gcc4.patch
+Source0:	http://downloads.sourceforge.net/vamp/%{srcname}-%{version}.tar.gz
+# Source0-md5:	d31e0d891bebdff75d4f4c709d5b2cab
+Patch0:		%{name}-link.patch
 URL:		http://www.vamp-plugins.org/
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	vampplugindir	%{_libdir}/vamp
+%define		vampplugindir	%{_libdir}/vamp
 
 %description
 Vamp is an audio processing plugin system for plugins that extract
@@ -39,6 +36,7 @@ Summary:	Header files for vamp library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki vamp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	libstdc++-devel
 
 %description devel
 Header files for vamp library.
@@ -71,7 +69,7 @@ Example vamp plugins.
 Przykładowe wtyczki vampa.
 
 %prep
-%setup -q -n %{_srcname}-%{version}
+%setup -q -n %{srcname}-v%{version}
 %patch0 -p1
 
 %build
@@ -100,14 +98,16 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYING README
+%attr(755,root,root) %{_bindir}/vamp-simple-host
 %attr(755,root,root) %{_libdir}/libvamp-hostsdk.*.*.*
-%attr(755,root,root) %{_libdir}/libvamp-sdk.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libvamp-hostsdk.so.3
+%attr(755,root,root) %{_libdir}/libvamp-sdk.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libvamp-sdk.so.2
 %dir %{vampplugindir}
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/vamp-rdf-template-generator
 %attr(755,root,root) %{_libdir}/libvamp-hostsdk.so
 %attr(755,root,root) %{_libdir}/libvamp-sdk.so
 %{_libdir}/libvamp-hostsdk.la
@@ -115,7 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/vamp
 %{_includedir}/vamp-hostsdk
 %{_includedir}/vamp-sdk
-%{_pkgconfigdir}/*.pc
+%{_pkgconfigdir}/vamp.pc
+%{_pkgconfigdir}/vamp-hostsdk.pc
+%{_pkgconfigdir}/vamp-sdk.pc
 
 %files static
 %defattr(644,root,root,755)
@@ -124,5 +126,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugins-example
 %defattr(644,root,root,755)
-%attr(755,root,root) %{vampplugindir}/vamp-example-plugins.cat
 %attr(755,root,root) %{vampplugindir}/vamp-example-plugins.so
+%{vampplugindir}/vamp-example-plugins.cat
+%{vampplugindir}/vamp-example-plugins.n3
