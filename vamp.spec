@@ -5,14 +5,16 @@
 Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
-Version:	2.2.1
+Version:	2.6
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/vamp/%{srcname}-%{version}.tar.gz
-# Source0-md5:	d31e0d891bebdff75d4f4c709d5b2cab
+#Source0Download: https://code.soundsoftware.ac.uk/projects/vamp-plugin-sdk/files
+Source0:	https://code.soundsoftware.ac.uk/attachments/download/1520/%{srcname}-%{version}.tar.gz
+# Source0-md5:	200d6f5980d8d8877d296975a7e2890b
 Patch0:		%{name}-link.patch
-URL:		http://www.vamp-plugins.org/
+# for plugins: http://www.vamp-plugins.org/
+URL:		https://code.soundsoftware.ac.uk/projects/vamp-plugin-sdk
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	pkgconfig
@@ -69,7 +71,7 @@ Example vamp plugins.
 Przykładowe wtyczki vampa.
 
 %prep
-%setup -q -n %{srcname}-v%{version}
+%setup -q -n %{srcname}-%{version}
 %patch0 -p1
 
 %build
