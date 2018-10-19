@@ -5,13 +5,13 @@
 Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
-Version:	2.6
-Release:	2
+Version:	2.7.1
+Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://code.soundsoftware.ac.uk/projects/vamp-plugin-sdk/files
-Source0:	https://code.soundsoftware.ac.uk/attachments/download/1520/%{srcname}-%{version}.tar.gz
-# Source0-md5:	200d6f5980d8d8877d296975a7e2890b
+Source0:	https://code.soundsoftware.ac.uk/attachments/download/2206/%{srcname}-%{version}.tar.gz
+# Source0-md5:	41129f07c252dd721ea81ef0265777fd
 Patch0:		%{name}-link.patch
 # for plugins: http://www.vamp-plugins.org/
 URL:		https://code.soundsoftware.ac.uk/projects/vamp-plugin-sdk
@@ -102,7 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING README
+%doc CHANGELOG COPYING README README.compat
 %attr(755,root,root) %{_bindir}/vamp-simple-host
 %attr(755,root,root) %{_libdir}/libvamp-hostsdk.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libvamp-hostsdk.so.3
