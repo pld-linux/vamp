@@ -5,18 +5,18 @@
 Summary:	vamp - API for audio analysis and feature extraction plugins
 Summary(pl.UTF-8):	vamp - API dla wtyczek analizy i wydobywania cech dźwięku
 Name:		vamp
-Version:	2.8.0
+Version:	2.10.0
 Release:	1
 License:	MIT
 Group:		Libraries
 #Source0Download: https://code.soundsoftware.ac.uk/projects/vamp-plugin-sdk/files
-Source0:	https://code.soundsoftware.ac.uk/attachments/download/2450/%{srcname}-%{version}.tar.gz
-# Source0-md5:	40bcaee615cfb62a7a76d35dc870b7e7
+Source0:	https://code.soundsoftware.ac.uk/attachments/download/2691/%{srcname}-%{version}.tar.gz
+# Source0-md5:	848f7ac0227b5c783bee0dd7a5cb3642
 Patch0:		%{name}-link.patch
 # for plugins: http://www.vamp-plugins.org/
 URL:		https://code.soundsoftware.ac.uk/projects/vamp-plugin-sdk
 BuildRequires:	libsndfile-devel
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -38,7 +38,7 @@ Summary:	Header files for vamp library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki vamp
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libstdc++-devel
+Requires:	libstdc++-devel >= 6:4.7
 
 %description devel
 Header files for vamp library.
