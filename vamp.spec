@@ -72,7 +72,7 @@ Przykładowe wtyczki vampa.
 
 %prep
 %setup -q -n %{srcname}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %configure
